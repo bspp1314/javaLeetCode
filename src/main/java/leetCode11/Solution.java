@@ -1,6 +1,6 @@
 package leetCode11;
 
-public class maxArea {
+public class Solution {
     //双指针法
     public int maxArea(int[] height) {
         int i = 0;
