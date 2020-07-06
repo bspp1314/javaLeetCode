@@ -8,6 +8,53 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Solution {
+
+    public List<List<Integer>> threeSum2(int[] nums) {
+        ArrayList<List<Integer>> ans = new ArrayList<List<Integer>>();
+        int len = nums.length;
+
+        if(nums ==null ||len < 3) {
+            return ans;
+        }
+
+        Arrays.sort(nums);
+
+        for(int i = 0;i<len-2;i++){
+            //nums[i] > 0 之后就不会有 a + b +c == 0
+            if(nums[i]>0)   {
+                break;
+            }
+
+            //去重
+            if( i>0 && nums[i] == nums[i-1]) {
+                continue;
+            }
+
+            int l = i+1;
+            int r = len-1;
+            while(l<r){
+                int sum = nums[i]+nums[l]+nums[r];
+                if(sum==0){
+                    ans.add(Arrays.asList(nums[i],nums[l],nums[r]));
+                    while(l<r && nums[l]==nums[l+1]){ // 去重
+                        l++;
+                    }
+                    while(l<r&&nums[r]==nums[r-1]) { // 去重
+                        r--;
+                    }
+
+                    l++;
+                    r--;
+                }else if(sum<0){ // sum 过小，指针向左移动
+                    l++;
+                }else if(sum>0){ // sum 过大，指针向右移动
+                    r--;
+                }
+            }
+        }
+        return ans;
+    }
+
     public List<List<Integer>> threeSum(int[] nums) {
         if (nums.length < 3){
             return null;
