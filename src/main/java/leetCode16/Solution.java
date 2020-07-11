@@ -50,8 +50,7 @@ public class Solution {
         //-1
         int a = new Solution().threeSumClosest(new int[]{-1,2,1,-4,0,-9,10,3,22,3},4);
 
-
-            System.out.println(a);
+        System.out.println(a);
     }
 
 
