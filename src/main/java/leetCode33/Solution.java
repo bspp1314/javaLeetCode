@@ -39,13 +39,13 @@ public class Solution {
             }
 
             if (nums[mid] > nums[0]) {
-                if (nums[0] < target && target < nums[mid] ) {
+                if (nums[0] <= target && target < nums[mid] ) {
                     right = mid - 1;
                 }else{
                     left = mid + 1;
                 }
             }else{
-                if (nums[mid] < target && target < nums[nums.length-1]) {
+                if (nums[mid] < target && target <= nums[nums.length-1]) {
                     left = mid + 1;
                 }else{
                     right = mid -1 ;
@@ -64,7 +64,7 @@ public class Solution {
         Solution s = new Solution();
         int a = s.search(array,1);
         for (int i = 0;i < array.length;i++){
-            System.out.println(s.search2(array,array[i]));
+            System.out.println(s.search(array,array[i]));
         }
     }
 }
