@@ -19,49 +19,52 @@ public class Solution {
         return result;
 
     }
-    //4,5,6,7,8,9,10,11,12,0,12
-    //nums = [4,5,6,7,0,1,2], target = 0
+
     public int search(int[] nums, int target) {
-        int m = 0;
-        int i = 1;
-        int j = 0;
-        int len = nums.length;
-        while (true) {
-            int tmp = (int)Math.pow(2,m+1);
-            if (tmp >= nums.length) {
-                i = j+1;
-                m = 0;
-            }else if (tmp == (nums.length -1)){
-                break;
-            }else{
-                System.out.println("i value is "+i);
-                System.out.println("nums len is " + nums.length);
-                if(nums[i] < nums[i-1]) {
-                    break;
+        if (nums.length == 0) {
+            return  -1;
+        }
+
+        if (nums.length == 1){
+            return  nums[0] == target ? 0:-1;
+        }
+
+        int left = 0;
+        int right = nums.length -1;
+
+        while (left <= right) {
+            int mid = left + (right -left) / 2;
+            if (nums[mid] == target)  {
+                return mid;
+            }
+
+            if (nums[mid] > nums[0]) {
+                if (nums[0] < target && target < nums[mid] ) {
+                    right = mid - 1;
                 }else{
-                    if (nums[i] < nums[j]) {
-                        i = j+1;
-                        m = 0;
-                    }else{
-                        m++;
-                        i = (int) (j + Math.pow(2,m)+1);
-                    }
+                    left = mid + 1;
+                }
+            }else{
+                if (nums[mid] < target && target < nums[nums.length-1]) {
+                    left = mid + 1;
+                }else{
+                    right = mid -1 ;
                 }
             }
         }
 
+        return  -1;
 
-        int res = binarySearch(nums,0,i-1,target);
-        if (res > 0){
-            return res;
-        }
-        return binarySearch(nums,i,nums.length,target);
     }
 
+
     public static void main(String[] args) {
-        int[] array = {0,4,5,6,7,8,9,10};
+        int[] array = {4,5,6,7,8,9,10,1,2,3};
 
         Solution s = new Solution();
-        s.search(array,0);
+        int a = s.search(array,1);
+        for (int i = 0;i < array.length;i++){
+            System.out.println(s.search2(array,array[i]));
+        }
     }
 }
