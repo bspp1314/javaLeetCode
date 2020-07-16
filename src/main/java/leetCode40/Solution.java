@@ -1,12 +1,11 @@
-package leetCode39;
+package leetCode40;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Solution {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         int len = candidates.length;
 
@@ -30,8 +29,13 @@ public class Solution {
             if (candidates[i] > target) {
                 return;
             }
+            if (i > begin && candidates[i] == candidates[i-1]){
+                continue;
+            }
             List<Integer> tem = new ArrayList<Integer>(subList);
             tem.add(candidates[i]);
+
+
 
             dfs(res,candidates,tem,i,target-candidates[i]);
         }
